@@ -35,7 +35,7 @@ map.on('load',function() {
     }
   })
   // define a 'source' for old industry dataset
-  map.addSource('oldindust',{
+  map.addSource('oldindustry',{
     'type':'geojson',
     'data': oldindust_url,
   });
@@ -43,28 +43,29 @@ map.on('load',function() {
   map.addLayer({
     'id':'oldindust',
     'type':'fill',
-    'source':'oldindust',
+    'source':'oldindustry',
     'paint':{
       'fill-color':'#9B59B6',
       'fill-outline-color' : '#F4F6F6'
       
     }
   })
-});
-
-map.on('click', 'landplots', function(e) {
+  map.on('click', 'oldindust', function(e) {
   new mapboxgl.Popup()
   .setLngLat(e.lngLat)
   .setHTML(e.features[0].properties.name)
   .addTo(map);
+  console.log(e)
   });
    
   // Change the cursor to a pointer when the mouse is over the states layer.
-  map.on('mouseenter', 'landplots', function() {
+  map.on('mouseenter', 'oldindust', function() {
   map.getCanvas().style.cursor = 'pointer';
   });
    
   // Change it back to a pointer when it leaves.
-  map.on('mouseleave', 'landplots', function() {
+  map.on('mouseleave', 'oldindust', function() {
   map.getCanvas().style.cursor = '';
   });
+});
+
